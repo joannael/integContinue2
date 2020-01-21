@@ -11,12 +11,12 @@ import com.dto.client.VilleFrance;
 
 public class VilleDAO {
 	
-	public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
+public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
 		
-		ArrayList<VilleFrance> ville = new ArrayList<VilleFrance>();
-		Connection connect = null;
+		ArrayList<VilleFrance> villesFrance = new ArrayList<VilleFrance>();
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+		ResultSet resultSet = null;
 		
 		String codeCommuneINSEE = villeFrance.getCodeCommuneINSEE();
 		String nomCommune = villeFrance.getNomCommune();
@@ -27,7 +27,7 @@ public class VilleDAO {
 		String longitude = villeFrance.getLongitude();
 		
 		try {
-			connect = this.creerConnexion();
+			connection = this.creerConnexion();
 			String query = "SELECT * FROM ville_france WHERE " +
 			(codeCommuneINSEE == null ? "Code_commune_INSEE IS NOT NULL " : "Code_commune_INSEE = ? ") + 
 			(nomCommune == null ? "AND Nom_commune IS NOT NULL " : "AND Nom_commune = ? ") +
@@ -35,69 +35,9 @@ public class VilleDAO {
 			(libelleAcheminement == null ? "AND Libelle_acheminement IS NOT NULL " : "AND Libelle_acheminement = ? ") +
 			(ligne5 == null ? "AND Ligne_5 IS NOT NULL " : "AND Ligne_5 = ? ") +
 			(latitude == null ? "AND Latitude IS NOT NULL " : "AND Latitude = ? ") +
-			(longitude == null ? "AND Longitude IS NOT NULL " : "AND Longitude = ? ") +
-			"AND isActive = 1";
+			(longitude == null ? "AND Longitude IS NOT NULL " : "AND Longitude = ? ");
 						
-			preparedStatement = connect.prepareStatement(query);
-			int index = 0;
-			if (codeCommuneINSEE != null) {
-				index++;
-				preparedStatement.setString(index, codeCommuneINSEE);
-			}
-			if (nomCommune != null) {
-				index++;
-				preparedStatement.setString(index, nomCommune);
-			}
-			if (codePostal != null) {
-				index++;
-				preparedStatement.setString(index, codePostal);
-			}
-			if (libelleAcheminement != null) {
-				index++;
-				preparedStatement.setString(index, libelleAcheminement);
-			}
-			if (ligne5 != null) {
-				index++;
-				preparedStatement.setString(index, ligne5);
-			}
-			if (latitude != null) {
-				index++;
-				preparedStatement.setString(index, latitude);
-			}
-			if (longitude != null) {
-				index++;
-				preparedStatement.setString(index, longitude);
-			}
-			
-			result = preparedStatement.executeQuery();
-			
-			while (result.next()) {
-				ville.add(this.map(result));
-			}
-			
-			result.close();
-			preparedStatement.close();
-			connect.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return ville;
-		
-	}
-	
-	public ArrayList<VilleFrance> trouverEntre(int offset) {
-		ArrayList<VilleFrance> villesFrance = new ArrayList<VilleFrance>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		
-		try {
-			connection = this.creerConnexion();
-			String query = "SELECT * FROM ville_france WHERE isActive = 1 ORDER BY Code_commune_INSEE ASC LIMIT 20 OFFSET ?";
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, offset);
-						
+			preparedStatement = connection.prepareStatement(query);			
 			resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
@@ -112,7 +52,10 @@ public class VilleDAO {
 		}
 		
 		return villesFrance;
+		
 	}
+	
+
 	
 	public void ajouter(VilleFrance villeFrance) {
 		Connection connection = null;
@@ -175,7 +118,7 @@ public class VilleDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void supprimer(String codeCommuneINSEE) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

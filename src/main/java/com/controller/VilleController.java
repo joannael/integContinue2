@@ -13,6 +13,7 @@ import com.dao.VilleDAO;
 import com.dto.client.VilleFrance;
 
 @RestController
+@RequestMapping("/path")
 public class VilleController {
 
 	@RequestMapping(value="/get", method=RequestMethod.GET)
@@ -39,7 +40,7 @@ public class VilleController {
 		villeFrance.setLongitude(getSpace(longitude));
 		
 		villesFrance = villeFranceDAO.trouver(villeFrance);
-		
+
 		return villesFrance;
 	}
 	
@@ -51,7 +52,7 @@ public class VilleController {
 		
 		VilleDAO villeFranceDAO = new VilleDAO();
 
-		villesFrance = villeFranceDAO.trouverEntre((int) Integer.parseInt(offset));
+		//villesFrance = villeFranceDAO.trouverEntre((int) Integer.parseInt(offset));
 				
 		return villesFrance;
 	}
@@ -111,7 +112,7 @@ public class VilleController {
 	public void delete(@PathVariable("codeCommuneINSEE") String codeCommuneINSEE) {
 		VilleDAO villeFranceDAO = new VilleDAO();
 		
-		villeFranceDAO.supprimer(codeCommuneINSEE);
+	villeFranceDAO.supprimer(codeCommuneINSEE);
 	}
 	
 
@@ -119,7 +120,7 @@ public class VilleController {
 		if (str == null) {
 			return str;
 		}
-		return str.replaceAll("%20", " ");
+		return str.replaceAll("%7", " ");
 	}
 	
 }
