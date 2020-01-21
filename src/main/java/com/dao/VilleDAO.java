@@ -52,13 +52,13 @@ public class VilleDAO implements villeDAOInterface{
 				villesFrance.add(this.map(resultSet));
 			}
 			
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
+		connection.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+				resultSet.close();
+				preparedStatement.close();
 		}
 		
 		return villesFrance;
