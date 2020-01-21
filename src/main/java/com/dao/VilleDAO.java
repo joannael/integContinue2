@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import com.config.JDBCConfigurationSol1;
 import com.dto.client.VilleFrance;
 
-public class VilleDAO {
+public class VilleDAO implements villeDAOInterface{
 	
-public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
+	public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
 		
 		ArrayList<VilleFrance> villesFrance = new ArrayList<VilleFrance>();
 		Connection connection = null;
@@ -135,7 +135,7 @@ public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
 		}
 	}
 	
-	private Connection creerConnexion() {
+	public Connection creerConnexion() {
 		JDBCConfigurationSol1 connect = new JDBCConfigurationSol1();
 		Connection connection = null;
 		
@@ -148,7 +148,7 @@ public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
 		return connection;
 	}
 	
-	private VilleFrance map(ResultSet resultSet) throws SQLException {
+	public VilleFrance map(ResultSet resultSet) throws SQLException {
 		VilleFrance villeFrance = new VilleFrance();
 		
 		villeFrance.setCodeCommuneINSEE(resultSet.getString("Code_commune_INSEE"));
