@@ -11,20 +11,28 @@ import com.dto.Ville;
 
 public class VilleDAO implements villeDAOInterface{
 	
+	String codeCommuneINSEE, nomCommune, codePostal,libelleAcheminement,ligne5,latitude, longitude;
+	
+	public void getterVille(Ville villeFrance) {
+		this.codeCommuneINSEE= villeFrance.getCodeCommuneINSEE();
+		this.nomCommune = villeFrance.getNomCommune();
+		this.codePostal = villeFrance.getCodePostal();
+		this.libelleAcheminement = villeFrance.getLibelleAcheminement();
+		this.ligne5 = villeFrance.getLigne5();
+		this.latitude = villeFrance.getLatitude();
+		this.longitude = villeFrance.getLongitude();		
+	}
+	
 	public ArrayList<Ville> trouver(Ville villeFrance) {
+		
+	
 		
 		ArrayList<Ville> villesFrance = new ArrayList<Ville>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String codeCommuneINSEE = villeFrance.getCodeCommuneINSEE();
-		String nomCommune = villeFrance.getNomCommune();
-		String codePostal = villeFrance.getCodePostal();
-		String libelleAcheminement = villeFrance.getLibelleAcheminement();
-		String ligne5 = villeFrance.getLigne5();
-		String latitude = villeFrance.getLatitude();
-		String longitude = villeFrance.getLongitude();
+		getterVille(villeFrance);
 		
 		try {
 			connection = this.creerConnexion();
@@ -57,18 +65,12 @@ public class VilleDAO implements villeDAOInterface{
 	
 
 	
-	public void ajouter(Ville ville) {
+	public void ajouter(Ville villeFrance) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String codeCommuneINSEE = ville.getCodeCommuneINSEE();
-		String nomCommune = ville.getNomCommune();
-		String codePostal = ville.getCodePostal();
-		String libelleAcheminement = ville.getLibelleAcheminement();
-		String ligne5 = ville.getLigne5();
-		String latitude = ville.getLatitude();
-		String longitude = ville.getLongitude();
-		
+		getterVille(villeFrance);
+
 		try {
 			connection = this.creerConnexion();
 			String query = "INSERT INTO ville_france VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
@@ -87,17 +89,12 @@ public class VilleDAO implements villeDAOInterface{
 		}
 	}
 	
-	public void modifier(Ville ville) {
+	public void modifier(Ville villeFrance) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String codeCommuneINSEE = ville.getCodeCommuneINSEE();
-		String nomCommune = ville.getNomCommune();
-		String codePostal = ville.getCodePostal();
-		String libelleAcheminement = ville.getLibelleAcheminement();
-		String ligne5 = ville.getLigne5();
-		String latitude = ville.getLatitude();
-		String longitude = ville.getLongitude();
+		getterVille(villeFrance);
+
 		
 		try {
 			connection = this.creerConnexion();
@@ -136,10 +133,11 @@ public class VilleDAO implements villeDAOInterface{
 	}
 	
 	public Connection creerConnexion() {
+		JDBCConfigurationSol1 connect = new JDBCConfigurationSol1();
 		Connection connection = null;
 		
 		try {
-			connection = JDBCConfigurationSol1.getConnection();
+			connection = connect.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -148,17 +146,17 @@ public class VilleDAO implements villeDAOInterface{
 	}
 	
 	public Ville map(ResultSet resultSet) throws SQLException {
-		Ville villeFrance = new Ville();
+		Ville ville = new Ville();
 		
-		villeFrance.setCodeCommuneINSEE(resultSet.getString("Code_commune_INSEE"));
-		villeFrance.setNomCommune(resultSet.getString("Nom_commune"));
-		villeFrance.setCodePostal(resultSet.getString("Code_postal"));
-		villeFrance.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
-		villeFrance.setLigne5(resultSet.getString("Ligne_5"));
-		villeFrance.setLatitude(resultSet.getString("Latitude"));
-		villeFrance.setLongitude(resultSet.getString("Longitude"));
+		ville.setCodeCommuneINSEE(resultSet.getString("Code_commune_INSEE"));
+		ville.setNomCommune(resultSet.getString("Nom_commune"));
+		ville.setCodePostal(resultSet.getString("Code_postal"));
+		ville.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
+		ville.setLigne5(resultSet.getString("Ligne_5"));
+		ville.setLatitude(resultSet.getString("Latitude"));
+		ville.setLongitude(resultSet.getString("Longitude"));
 		
-		return villeFrance;
+		return ville;
 	}
 
 }
