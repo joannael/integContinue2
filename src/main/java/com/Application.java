@@ -19,5 +19,5 @@ public class Application {
 		} catch (Exception e) {
 			logger.log(Level.INFO, "Application demarree !");
 		}  
-	}
+	} 
 }
