@@ -89,7 +89,7 @@ public class VilleController {
 			@RequestParam(required = false, value="libelleAcheminement") String libelleAcheminement,
 			@RequestParam(required = false, value="ligne5") String ligne5,
 			@RequestParam(required = false, value="latitude") String latitude,
-			@RequestParam(required = false, value="longitude") String longitude) {
+			@RequestParam(required = false, value="longitude") String longitude) throws SQLException {
 				
 		VilleDAO villeFranceDAO = new VilleDAO();
 
@@ -108,7 +108,7 @@ public class VilleController {
 	
 	@RequestMapping(value="/delete/{codeCommuneINSEE}", method=RequestMethod.DELETE)
 	@ResponseBody
-	public void delete(@PathVariable("codeCommuneINSEE") String codeCommuneINSEE) {
+	public void delete(@PathVariable("codeCommuneINSEE") String codeCommuneINSEE) throws SQLException {
 		VilleDAO villeFranceDAO = new VilleDAO();
 		
 	villeFranceDAO.supprimer(codeCommuneINSEE);
