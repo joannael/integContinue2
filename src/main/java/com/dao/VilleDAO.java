@@ -23,7 +23,7 @@ public class VilleDAO implements villeDAOInterface{
 		this.longitude = villeFrance.getLongitude();		
 	}
 	
-	public ArrayList<Ville> trouver(Ville villeFrance) {
+	public ArrayList<Ville> trouver(Ville villeFrance) throws SQLException {
 		
 	
 		
@@ -57,6 +57,10 @@ public class VilleDAO implements villeDAOInterface{
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			preparedStatement.close();		
+			resultSet.close();
+			
 		}
 		
 		return villesFrance;

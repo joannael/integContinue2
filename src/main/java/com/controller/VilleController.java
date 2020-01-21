@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class VilleController {
 			@RequestParam(required = false, value="libelleAcheminement") String libelleAcheminement,
 			@RequestParam(required = false, value="ligne5") String ligne5,
 			@RequestParam(required = false, value="latitude") String latitude,
-			@RequestParam(required = false, value="longitude") String longitude) {
+			@RequestParam(required = false, value="longitude") String longitude) throws SQLException {
 		
 		ArrayList<Ville> villesFrance = null;
 		

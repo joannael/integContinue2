@@ -9,7 +9,7 @@ import com.dto.Ville;
 
 public interface villeDAOInterface {
 	
-	public ArrayList<Ville> trouver(Ville villeFrance);
+	public ArrayList<Ville> trouver(Ville villeFrance) throws SQLException;
 	public void ajouter(Ville villeFrance);
 	public void modifier(Ville villeFrance);
 	public void supprimer(String codeCommuneINSEE);
