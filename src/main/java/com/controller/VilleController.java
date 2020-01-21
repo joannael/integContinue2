@@ -49,8 +49,6 @@ public class VilleController {
 	public ArrayList<VilleFrance> getWithPagination(@RequestParam(required = true, value="offset") String offset) {
 		
 		ArrayList<VilleFrance> villesFrance = null;
-		
-		VilleDAO villeFranceDAO = new VilleDAO();
 
 		//villesFrance = villeFranceDAO.trouverEntre((int) Integer.parseInt(offset));
 				

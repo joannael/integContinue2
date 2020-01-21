@@ -136,11 +136,10 @@ public class VilleDAO implements villeDAOInterface{
 	}
 	
 	public Connection creerConnexion() {
-		JDBCConfigurationSol1 connect = new JDBCConfigurationSol1();
 		Connection connection = null;
 		
 		try {
-			connection = connect.getConnection();
+			connection = JDBCConfigurationSol1.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
