@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.dao.VilleDAO;
-import com.dto.client.VilleFrance;
+import com.dto.Ville;
 
 @RestController
 @RequestMapping("/path")
@@ -18,7 +18,7 @@ public class VilleController {
 
 	@RequestMapping(value="/get", method=RequestMethod.GET)
 	@ResponseBody
-	public ArrayList<VilleFrance> get(@RequestParam(required = false, value="codeCommuneINSEE") String codeCommuneINSEE,
+	public ArrayList<Ville> get(@RequestParam(required = false, value="codeCommuneINSEE") String codeCommuneINSEE,
 			@RequestParam(required = false, value="nomCommune") String nomCommune,
 			@RequestParam(required = false, value="codePostal") String codePostal,
 			@RequestParam(required = false, value="libelleAcheminement") String libelleAcheminement,
@@ -26,11 +26,11 @@ public class VilleController {
 			@RequestParam(required = false, value="latitude") String latitude,
 			@RequestParam(required = false, value="longitude") String longitude) {
 		
-		ArrayList<VilleFrance> villesFrance = null;
+		ArrayList<Ville> villesFrance = null;
 		
 		VilleDAO villeFranceDAO = new VilleDAO();
 
-		VilleFrance villeFrance = new VilleFrance();
+		Ville villeFrance = new Ville();
 		villeFrance.setCodeCommuneINSEE(getSpace(codeCommuneINSEE));
 		villeFrance.setNomCommune(getSpace(nomCommune));
 		villeFrance.setCodePostal(getSpace(codePostal));
@@ -46,9 +46,9 @@ public class VilleController {
 	
 	@RequestMapping(value="/getWithPagination", method=RequestMethod.GET)
 	@ResponseBody
-	public ArrayList<VilleFrance> getWithPagination(@RequestParam(required = true, value="offset") String offset) {
+	public ArrayList<Ville> getWithPagination(@RequestParam(required = true, value="offset") String offset) {
 		
-		ArrayList<VilleFrance> villesFrance = null;
+		ArrayList<Ville> villesFrance = null;
 
 		//villesFrance = villeFranceDAO.trouverEntre((int) Integer.parseInt(offset));
 				
@@ -65,7 +65,7 @@ public class VilleController {
 			@RequestParam(required = true, value="latitude") String latitude,
 			@RequestParam(required = true, value="longitude") String longitude) {
 		
-		VilleFrance villeFrance = new VilleFrance();
+		Ville villeFrance = new Ville();
 		VilleDAO villeFranceDAO = new VilleDAO();
 		
 		villeFrance.setCodeCommuneINSEE(getSpace(codeCommuneINSEE));
@@ -92,7 +92,7 @@ public class VilleController {
 				
 		VilleDAO villeFranceDAO = new VilleDAO();
 
-		VilleFrance villeFrance = new VilleFrance();
+		Ville villeFrance = new Ville();
 		villeFrance.setCodeCommuneINSEE(getSpace(codeCommuneINSEE));
 		villeFrance.setNomCommune(getSpace(nomCommune));
 		villeFrance.setCodePostal(getSpace(codePostal));

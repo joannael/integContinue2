@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.config.JDBCConfigurationSol1;
-import com.dto.client.VilleFrance;
+import com.dto.Ville;
 
 public class VilleDAO implements villeDAOInterface{
 	
-	public ArrayList<VilleFrance> trouver(VilleFrance villeFrance) {
+	public ArrayList<Ville> trouver(Ville villeFrance) {
 		
-		ArrayList<VilleFrance> villesFrance = new ArrayList<VilleFrance>();
+		ArrayList<Ville> villesFrance = new ArrayList<Ville>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -57,17 +57,17 @@ public class VilleDAO implements villeDAOInterface{
 	
 
 	
-	public void ajouter(VilleFrance villeFrance) {
+	public void ajouter(Ville ville) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String codeCommuneINSEE = villeFrance.getCodeCommuneINSEE();
-		String nomCommune = villeFrance.getNomCommune();
-		String codePostal = villeFrance.getCodePostal();
-		String libelleAcheminement = villeFrance.getLibelleAcheminement();
-		String ligne5 = villeFrance.getLigne5();
-		String latitude = villeFrance.getLatitude();
-		String longitude = villeFrance.getLongitude();
+		String codeCommuneINSEE = ville.getCodeCommuneINSEE();
+		String nomCommune = ville.getNomCommune();
+		String codePostal = ville.getCodePostal();
+		String libelleAcheminement = ville.getLibelleAcheminement();
+		String ligne5 = ville.getLigne5();
+		String latitude = ville.getLatitude();
+		String longitude = ville.getLongitude();
 		
 		try {
 			connection = this.creerConnexion();
@@ -87,17 +87,17 @@ public class VilleDAO implements villeDAOInterface{
 		}
 	}
 	
-	public void modifier(VilleFrance villeFrance) {
+	public void modifier(Ville ville) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String codeCommuneINSEE = villeFrance.getCodeCommuneINSEE();
-		String nomCommune = villeFrance.getNomCommune();
-		String codePostal = villeFrance.getCodePostal();
-		String libelleAcheminement = villeFrance.getLibelleAcheminement();
-		String ligne5 = villeFrance.getLigne5();
-		String latitude = villeFrance.getLatitude();
-		String longitude = villeFrance.getLongitude();
+		String codeCommuneINSEE = ville.getCodeCommuneINSEE();
+		String nomCommune = ville.getNomCommune();
+		String codePostal = ville.getCodePostal();
+		String libelleAcheminement = ville.getLibelleAcheminement();
+		String ligne5 = ville.getLigne5();
+		String latitude = ville.getLatitude();
+		String longitude = ville.getLongitude();
 		
 		try {
 			connection = this.creerConnexion();
@@ -147,8 +147,8 @@ public class VilleDAO implements villeDAOInterface{
 		return connection;
 	}
 	
-	public VilleFrance map(ResultSet resultSet) throws SQLException {
-		VilleFrance villeFrance = new VilleFrance();
+	public Ville map(ResultSet resultSet) throws SQLException {
+		Ville villeFrance = new Ville();
 		
 		villeFrance.setCodeCommuneINSEE(resultSet.getString("Code_commune_INSEE"));
 		villeFrance.setNomCommune(resultSet.getString("Nom_commune"));
