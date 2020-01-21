@@ -120,7 +120,7 @@ public class VilleController {
 		if (str == null) {
 			return str;
 		}
-		return str.replaceAll("%7", " ");
+		return str.replaceAll("%20", " ");
 	}
 	
 }
